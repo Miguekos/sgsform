@@ -1,8 +1,9 @@
 <template>
   <div class="q-pa-md">
+    <!--    {{Registro.result}}-->
     <q-table
       title="Registros"
-      :data="rows"
+      :data="Registro.result"
       :columns="columns"
       row-key="name"
       :pagination.sync="pagination"
@@ -21,118 +22,58 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       pagination: {
         sortBy: "desc",
         descending: false,
-        page: 2,
+        page: 1,
         rowsPerPage: 3
         // rowsNumber: xx if getting data from a server
       },
-
       columns: [
         {
           name: "desc",
           required: true,
           label: "Nombre",
           align: "left",
-          field: row => row.name,
+          field: row => row.nombres,
           format: val => `${val}`,
           sortable: true
         },
         {
-          name: "calories",
+          name: "documentIdentidad",
           align: "center",
-          label: "Calories",
-          field: "calories",
+          label: "DNI",
+          field: "documentIdentidad",
           sortable: true
         },
-        { name: "fat", label: "Fat (g)", field: "fat", sortable: true },
-        { name: "carbs", label: "Carbs (g)", field: "carbs" },
-        { name: "protein", label: "Protein (g)", field: "protein" }
+        {
+          name: "metodosDePagos",
+          label: "Metodos de Pagos",
+          field: "metodosDePagos",
+          sortable: true
+        },
+        { name: "direccion", label: "Direccion", field: "direccion" },
+        { name: "teleCelular", label: "Telf/Celular", field: "teleCelular" }
       ],
-
-      rows: [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5
-        },
-        {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7
-        }
-      ]
+      rows: []
     };
   },
-
+  methods: {
+    ...mapActions("example", ["getRegistro"])
+  },
   computed: {
+    ...mapGetters("example", ["Registro"]),
     pagesNumber() {
       return Math.ceil(this.rows.length / this.pagination.rowsPerPage);
     }
+  },
+  async created() {
+    await this.getRegistro();
   }
 };
 </script>

@@ -120,6 +120,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -136,20 +137,18 @@ export default {
   },
 
   methods: {
-    onSubmit(evt) {
-      const formData = new FormData(evt.target);
-      const submitResult = [];
-
-      for (const [name, value] of formData.entries()) {
-        submitResult.push({
-          name,
-          value
-        });
-      }
-
-      this.submitResult = submitResult;
+    ...mapActions("example", ["addRegistro", "getRegistro"]),
+    async onSubmit(evt) {
+      await this.addRegistro({
+        nombres: this.nombres,
+        apellidos: this.apellidos,
+        documentIdentidad: this.documentIdentidad,
+        teleCelular: this.teleCelular,
+        direccion: this.direccion,
+        metodosDePagos: this.metodosDePagos
+      });
+      await this.getRegistro();
     }
   }
 };
 </script>
-

@@ -1,2 +1,3 @@
-export function someGetter (/* state */) {
+export function Registro(state) {
+  return state.getRegistro;
 }
