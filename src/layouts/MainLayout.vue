@@ -1,30 +1,39 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-white">
-      <q-toolbar>
-        <q-toolbar-title class="text-red text-center text-h4 q-pt-md">
-          FORMULARIO DE REGISTRO
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-header>
+  <div class="my-font principal">
+    <q-layout view="lHh Lpr lFf">
+      <q-header class="bg-white">
+        <q-toolbar>
+          <q-toolbar-title style="color: #848685" class="text-center text-h4">
+            <div class="column">
+              <span style="margin: 0px 0px -15px 0px;">
+                <img width="100px" class="q-mt-sm" src="sgs-logo.png" alt="" />
+              </span>
+              <div class="text-h5">
+                Registro
+              </div>
+            </div>
+          </q-toolbar-title>
+        </q-toolbar>
+      </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" bordered content-class="bg-grey-1">
-      <q-list>
-        <q-item-label header class="text-grey-8">
-          Essential Links
-        </q-item-label>
-        <!--        <EssentialLink-->
-        <!--          v-for="link in essentialLinks"-->
-        <!--          :key="link.title"-->
-        <!--          v-bind="link"-->
-        <!--        />-->
-      </q-list>
-    </q-drawer>
+      <q-drawer v-model="leftDrawerOpen" bordered content-class="bg-grey-1">
+        <q-list>
+          <q-item-label header class="text-grey-8">
+            Essential Links
+          </q-item-label>
+          <!--        <EssentialLink-->
+          <!--          v-for="link in essentialLinks"-->
+          <!--          :key="link.title"-->
+          <!--          v-bind="link"-->
+          <!--        />-->
+        </q-list>
+      </q-drawer>
 
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-  </q-layout>
+      <q-page-container>
+        <router-view />
+      </q-page-container>
+    </q-layout>
+  </div>
 </template>
 
 <script>
@@ -78,7 +87,7 @@ const linksData = [
 export default {
   name: "MainLayout",
   components: {
-      // EssentialLink
+    // EssentialLink
   },
   data() {
     return {

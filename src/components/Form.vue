@@ -8,6 +8,7 @@
             <div class="col">
               <q-input
                 ref="nombres"
+                dense
                 v-model="form.nombres"
                 color="primary"
                 label="Nombres"
@@ -20,6 +21,7 @@
             <div class="col">
               <q-input
                 ref="apellidos"
+                dense
                 v-model="form.apellidos"
                 color="primary"
                 label="Apellidos"
@@ -35,6 +37,7 @@
             <div class="col">
               <q-input
                 ref="documentIdentidad"
+                dense
                 v-model="form.documentIdentidad"
                 color="primary"
                 label="DNI/CE/RUC"
@@ -49,6 +52,7 @@
             <div class="col">
               <q-input
                 ref="teleCelular"
+                dense
                 v-model="form.teleCelular"
                 color="primary"
                 label="Telefono/Celular"
@@ -66,6 +70,7 @@
             <div class="col">
               <q-input
                 ref="direccion"
+                dense
                 v-model="form.direccion"
                 color="primary"
                 label="Direccion"
@@ -78,6 +83,7 @@
             <div class="col">
               <q-select
                 ref="metodosDePagos"
+                dense
                 filled
                 v-model="form.metodosDePagos"
                 :options="options"
