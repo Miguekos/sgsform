@@ -3,12 +3,12 @@
     <div class="row">
       <div class="col-12 col-md-2"></div>
       <div class="col-12 col-md-8">
-        <q-form @submit="onSubmit" class="q-gutter-md">
+        <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
           <div class="row q-gutter-xs">
             <div class="col">
               <q-input
-                name="nombres"
-                v-model="nombres"
+                ref="nombres"
+                v-model="form.nombres"
                 color="primary"
                 label="Nombres"
                 filled
@@ -19,8 +19,8 @@
             </div>
             <div class="col">
               <q-input
-                name="apellidos"
-                v-model="apellidos"
+                ref="apellidos"
+                v-model="form.apellidos"
                 color="primary"
                 label="Apellidos"
                 filled
@@ -34,8 +34,8 @@
           <div class="row q-gutter-xs">
             <div class="col">
               <q-input
-                name="documentIdentidad"
-                v-model="documentIdentidad"
+                ref="documentIdentidad"
+                v-model="form.documentIdentidad"
                 color="primary"
                 label="DNI/CE/RUC"
                 filled
@@ -48,8 +48,8 @@
             </div>
             <div class="col">
               <q-input
-                name="teleCelular"
-                v-model="teleCelular"
+                ref="teleCelular"
+                v-model="form.teleCelular"
                 color="primary"
                 label="Telefono/Celular"
                 filled
@@ -65,8 +65,8 @@
           <div class="row q-gutter-xs">
             <div class="col">
               <q-input
-                name="direccion"
-                v-model="direccion"
+                ref="direccion"
+                v-model="form.direccion"
                 color="primary"
                 label="Direccion"
                 filled
@@ -77,9 +77,9 @@
             </div>
             <div class="col">
               <q-select
-                name="metodosDePagos"
+                ref="metodosDePagos"
                 filled
-                v-model="metodosDePagos"
+                v-model="form.metodosDePagos"
                 :options="options"
                 label="Metodos de pagos"
                 clearable
@@ -89,8 +89,15 @@
             </div>
           </div>
 
-          <div align="center">
-            <q-btn label="Enviar" type="submit" color="primary" />
+          <div align="center" class="q-gutter-lg">
+            <q-btn
+              label="Enviar"
+              :loading="loadboton"
+              type="submit"
+              size="sm"
+              color="primary"
+            />
+            <q-btn label="Reset" type="reset" size="sm" color="orange" />
           </div>
         </q-form>
         <q-card
@@ -121,33 +128,59 @@
 </template>
 <script>
 import { mapActions } from "vuex";
+import { addRegistro } from "../store/module-example/actions";
 export default {
   data() {
     return {
-      options: ["Deposito", "TDC"],
-      name: "Jane Doe",
-      nombres: "",
-      apellidos: "",
-      documentIdentidad: "",
-      teleCelular: "",
-      direccion: "",
-      metodosDePagos: "",
-      submitResult: []
-    };
-  },
-
-  methods: {
-    ...mapActions("example", ["addRegistro", "getRegistro"]),
-    async onSubmit(evt) {
-      await this.addRegistro({
+      loadboton: false,
+      form: {
         nombres: this.nombres,
         apellidos: this.apellidos,
         documentIdentidad: this.documentIdentidad,
         teleCelular: this.teleCelular,
         direccion: this.direccion,
         metodosDePagos: this.metodosDePagos
+      },
+      options: ["Deposito", "TDC"],
+      name: "Jane Doe",
+      submitResult: []
+    };
+  },
+
+  methods: {
+    ...mapActions("example", ["addRegistro", "getRegistro"]),
+    onReset() {
+      this.$refs.nombres.resetValidation();
+      this.$refs.apellidos.resetValidation();
+      this.$refs.documentIdentidad.resetValidation();
+      this.$refs.teleCelular.resetValidation();
+      this.$refs.direccion.resetValidation();
+      // this.$refs.metodosDePago.resetValidation();
+      this.form.metodosDePago = null;
+    },
+    async onSubmit(evt) {
+      this.loadboton = true;
+      await this.addRegistro(this.form);
+      this.$q.notify({
+        message: "Registro Correcto",
+        color: "green"
       });
+      this.form.nombres = "";
+      this.form.apellidos = "";
+      this.form.documentIdentidad = "";
+      this.form.teleCelular = "";
+      this.form.direccion = "";
+      this.form.metodosDePago = null;
+
+      this.$refs.nombres.resetValidation();
+      this.$refs.apellidos.resetValidation();
+      this.$refs.documentIdentidad.resetValidation();
+      this.$refs.teleCelular.resetValidation();
+      this.$refs.direccion.resetValidation();
+      this.$refs.metodosDePago.resetValidation();
+
       await this.getRegistro();
+      this.loadboton = false;
     }
   }
 };
