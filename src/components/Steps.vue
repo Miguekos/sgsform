@@ -364,8 +364,11 @@ export default {
       console.log("this.form");
       console.log(this.form);
       console.log("this.form");
-      this.$store.commit("example/data_form", this.form)
-    //   await this.addRegistro(this.form);
+      // this.$store.commit("example/data_form", this.form)
+      await this.addRegistro({
+        ...this.form,
+        ...this.get_buscarConsumidor
+      });
       this.$q.notify({
         message: "Registro Correcto",
         color: "green"
