@@ -419,22 +419,22 @@ export default {
       const element = array[index];
       console.log(element.key);
       switch (element.key) {
-        case "_billing_field_695":
+        case "_billing_field_748":
           this.form.correoElectronico = element.value;          
           break;
         case "_billing_field_419":
           this.form.direccion= element.value;
           break;
-        case "_billing_field_646":
+        case "_billing_field_482":
           this.form.teleCelular = element.value;
           break;
-        case "billing_field_325":
+        case "_billing_field_176":
           this.form.nombres = element.value;          
           break;
-        case "billing_field_194":
+        case "_billing_field_653":
           this.form.documentIdentidad = element.value;          
           break;
-        case "_billing_field_802":
+        case "_billing_field_651":
           this.form.apellidos = element.value;          
           break;
         case "_billing_field_695":
