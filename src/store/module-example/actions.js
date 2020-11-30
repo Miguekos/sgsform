@@ -1,4 +1,4 @@
-import { axiosInstance, axiosInstanceWP } from "boot/axios";
+import { axiosInstance } from "boot/axios";
 
 /* eslint-disable */
 export async function addRegistro({ commit }, payload) {
