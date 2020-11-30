@@ -18,6 +18,7 @@
         title="*1. Modalidad de capacitación:"
         icon="settings"
         :done="step > 1"
+        :style="$q.screen.xs ? '' : stilo"
       >
   <q-select v-model="model" :options="options" label="Selecciona tu Modalidad"/>
       </q-step>
@@ -27,6 +28,7 @@
         :title="`*2. ${model ? model : 'Diplomado'}`"
         icon="create_new_folder"
         :done="step > 2"
+        :style="$q.screen.xs ? '' : stilo"
       >
       <q-select v-model="model2" :options="options2" label="Selecciona tu una opcion"/>
       </q-step>
@@ -36,6 +38,7 @@
         title="*3. Datos personales"
         icon="assignment"
         :done="step > 3"
+        :style="$q.screen.xs ? '' : stilo"
       >
          <div class="q-pa-md">
           <div class="row">
@@ -278,6 +281,7 @@
         :name="4"
         title="4. Finalizar"
         icon="add_comment"
+        :style="$q.screen.xs ? '' : stilo"
       >
       <div style="text-align: center;">
               <span style="margin: 0px 0px 0px 0px;">
@@ -292,7 +296,7 @@
       <template v-slot:navigation>
         <q-stepper-navigation>
           <q-btn @click="lospaos()" color="primary" :label="step === 4 ? 'Terminar' : 'Continuar'" />
-          <q-btn v-if="step > 1 && step == 3" flat color="primary" @click="$refs.stepper.previous()" label="Atras" class="q-ml-sm" />
+          <q-btn v-if="step > 1 && step < 4" flat color="primary" @click="$refs.stepper.previous()" label="Atras" class="q-ml-sm" />
         </q-stepper-navigation>
       </template>
 
@@ -325,6 +329,7 @@ export default {
   },
   data () {
     return {
+      stilo: "min-height: 68vh",
        loadboton: false,
       form: {
         nombres: this.nombre,
@@ -391,6 +396,8 @@ export default {
           this.onSubmit()
           // this.$emit("guardarForm")
           this.$emit("qwe")
+      } else if (this.step == 4) {
+        location.href="https://sgsacademy.pe/"
       } else {
         this.$refs.stepper.next()
       }
