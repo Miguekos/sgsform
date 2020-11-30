@@ -1,5 +1,7 @@
-export default function() {
+export default function () {
   return {
-    getRegistro: []
+    getRegistro: [],
+    get_buscarConsumidor: [],
+    data_form: []
   };
 }

@@ -95,7 +95,7 @@
             </div>
           </div>
 
-          <div align="center" class="q-gutter-lg">
+          <!-- <div align="center" class="q-gutter-lg">
             <q-btn
               label="Enviar"
               :loading="loadboton"
@@ -104,7 +104,7 @@
               color="primary"
             />
             <q-btn label="Reset" type="reset" size="sm" color="orange" />
-          </div>
+          </div> -->
         </q-form>
         <q-card
           v-if="submitResult.length > 0"

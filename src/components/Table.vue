@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-md">
-    <!--    {{Registro.result}}-->
+       <!-- {{Registro.result}} -->
     <q-table
       title="Registros"
       :data="Registro.result"
@@ -9,6 +9,8 @@
       :loading="loading"
       :pagination.sync="pagination"
       hide-pagination
+      virtual-scroll
+      style="max-height: 80vh"
     >
       <template v-slot:top-right>
         <q-btn
@@ -72,7 +74,7 @@ export default {
         sortBy: "desc",
         descending: false,
         page: 1,
-        rowsPerPage: 3
+        rowsPerPage: 0
         // rowsNumber: xx if getting data from a server
       },
       columns: [
@@ -86,16 +88,16 @@ export default {
           sortable: true
         },
         {
-          name: "documentIdentidad",
+          name: "pais",
           align: "center",
-          label: "DNI",
-          field: "documentIdentidad",
+          label: "Pais",
+          field: "pais",
           sortable: true
         },
         {
-          name: "metodosDePagos",
-          label: "Metodos de Pagos",
-          field: "metodosDePagos",
+          name: "correoElectronico",
+          label: "Correo",
+          field: "correoElectronico",
           sortable: true
         },
         { name: "direccion", label: "Direccion", field: "direccion" },
