@@ -146,7 +146,7 @@
                       dense
                       filled
                       v-model="form.distrito"
-                      :options="options"
+                      :options="distritoOptions"
                       label="Distrito:"
                       clearable
                       lazy-rules
@@ -159,7 +159,7 @@
                       dense
                       filled
                       v-model="form.provincia"
-                      :options="options"
+                      :options="provinciaOptions"
                       label="Provincia:"
                       clearable
                       lazy-rules
@@ -172,7 +172,7 @@
                       dense
                       filled
                       v-model="form.departamento"
-                      :options="options"
+                      :options="departamentoOptions"
                       label="Departamento:"
                       clearable
                       lazy-rules
@@ -230,7 +230,7 @@
                       dense
                       filled
                       v-model="form.otros"
-                      :options="options"
+                      :options="options3"
                       label="Otro (especifique)"
                       clearable
                       lazy-rules
@@ -343,7 +343,7 @@ export default {
         distrito : this.distrito,
         provincia : this.provincia,
         departamento : this.departamento,
-        pais : this.pais,
+        pais : "PERU",
         enteraste : this.enteraste,
         otros : this.otros,
       },
@@ -351,6 +351,9 @@ export default {
       options: ["Diplomado", "Programa", "Curso y Taller", "Autogestionado"],
       options2: ["Dip. en Gerencia de la Calidad", "Dip. en Gestión de la Seguridad y Salud en el Trabajo", "Dip. en Sistemas Integrados de Gestión", "Dip. en Especialización Avanzada en Gestión de Procesos", "Dip. en Gestión Ambiental para Organizaciones Sostenibles"],
       options3: ["Facebook", "Instagram", "LinkedIn", "Página web", "Webinar", "Recomendación"],
+      distritoOptions: ["Lima"],
+      provinciaOptions: ["Lima"],
+      departamentoOptions: ["Lima"],
       model: "",
       model2: "",
       model3: "",
@@ -367,7 +370,9 @@ export default {
       // this.$store.commit("example/data_form", this.form)
       await this.addRegistro({
         ...this.form,
-        ...this.get_buscarConsumidor
+        ...this.get_buscarConsumidor,
+        modealidadCapa : this.model,
+        tipoCapa : this.model2
       });
       this.$q.notify({
         message: "Registro Correcto",
@@ -407,18 +412,51 @@ export default {
     }
   },
   async created () {
-     this.form.nombres = this.get_buscarConsumidor.billing.first_name;
-    this.form.apellidos= this.get_buscarConsumidor.billing.last_name;
-    this.form.documentIdentidad= this.documentIdentidad;
-    this.form.teleCelular= this.get_buscarConsumidor.billing.phone;
-    this.form.direccion= this.get_buscarConsumidor.billing.address_1;
-    this.form.metodosDePagos= this.metodosDePagos;
+
+    // console.log(this.get_buscarConsumidor.meta_data);
+    const array = this.get_buscarConsumidor.meta_data
+    for (let index = 0; index < array.length; index++) {
+      const element = array[index];
+      console.log(element.key);
+      switch (element.key) {
+        case "_billing_field_695":
+          this.form.correoElectronico = element.value;          
+          break;
+        case "_billing_field_419":
+          this.form.direccion= element.value;
+          break;
+        case "_billing_field_646":
+          this.form.teleCelular = element.value;
+          break;
+        case "billing_field_325":
+          this.form.nombres = element.value;          
+          break;
+        case "billing_field_194":
+          this.form.documentIdentidad = element.value;          
+          break;
+        case "_billing_field_802":
+          this.form.apellidos = element.value;          
+          break;
+        case "_billing_field_695":
+          this.form.correoElectronico = element.value;          
+          break;
+        case "_billing_field_695":
+          this.form.correoElectronico = element.value;          
+          break;
+        case "_billing_field_695":
+          this.form.correoElectronico = element.value;          
+          break;
+        default:
+          break;
+      }
+      
+    }
+
     this.form.fechaNacimiento = this.fechaNacimiento;
-    this.form.correoElectronico = this.get_buscarConsumidor.billing.email;
     this.form.distrito = this.distrito;
     this.form.provincia = this.provincia;
     this.form.departamento = this.departamento;
-    this.form.pais = this.get_buscarConsumidor.billing.country;
+    this.form.pais = "PERU";
     this.form.enteraste = this.enteraste;
     this.form.otros = this.otros;
   }
