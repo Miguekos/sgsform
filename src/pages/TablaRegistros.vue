@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "PageIndex",
+  name: "TablaRegistros",
   components: {
     Table: () => import("components/Table")
   }
