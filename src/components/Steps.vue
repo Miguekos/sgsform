@@ -30,7 +30,7 @@
         :done="step > 2"
         :style="$q.screen.xs ? '' : stilo"
       >
-      <q-select v-model="model2" :options="options2" label="Selecciona tu una opcion"/>
+      <q-select v-model="model2" disable :options="options2" label="Selecciona tu una opcion"/>
       </q-step>
 
       <q-step
@@ -452,6 +452,7 @@ export default {
       
     }
 
+    this.model2 = this.get_buscarConsumidor.line_items[0].name
     this.form.fechaNacimiento = this.fechaNacimiento;
     this.form.distrito = this.distrito;
     this.form.provincia = this.provincia;
