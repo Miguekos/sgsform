@@ -2,8 +2,9 @@
   <div class="q-pa-xs">
     <div class="row q-pa-md">
       <div class="col-md-2 text-left q-pb-xs q-px-lg">
-        Gracias por confiar en SGS Academy, <br> por favor favor termina tu matricula
-        completando el siguiente formulario.
+        Gracias por confiar en SGS Academy, <br />
+        por favor favor termina tu matricula completando el siguiente
+        formulario.
       </div>
       <div class="col-md-8 col-xs-12">
         <q-stepper
@@ -14,7 +15,6 @@
           :vertical="$q.screen.xs"
         >
           <q-step
-            style="padding-left: 0px; padding-right: 0px;"
             :name="1"
             title="*1. Modalidad de capacitación:"
             icon="settings"
