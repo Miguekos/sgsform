@@ -1,20 +1,26 @@
 <template>
-  <div class="my-font principal">
+  <div class="principal">
     <q-layout view="lHh Lpr lFf">
-      <q-header class="bg-white">
+      <q-header elevated class="bg-white">
         <q-toolbar>
-          <q-toolbar-title style="color: #848685" class="text-center text-h4">
+          <q-toolbar-title style="color: #848685" class="text-h4">
             <div class="column">
-              <span style="margin: 0px 0px -15px 0px;">
-                <img width="100px" class="q-mt-sm" src="sgs-logo.png" alt="" />
-              </span>
               <div class="text-h5">
-                Registro
+                SGS<span style="color: #e06b31"> ACADEMY</span>
               </div>
             </div>
           </q-toolbar-title>
         </q-toolbar>
       </q-header>
+
+       <q-banner inline-actions style="background-color: #e06b31; padding-top: 60px;" class="text-white">
+        ZONA DE <br> MATRICULA
+
+        <!-- <template v-slot:action>
+          <q-btn flat label="Turn ON Wifi" />
+          <q-btn flat label="Dismiss" />
+        </template> -->
+      </q-banner>
 
       <q-drawer v-model="leftDrawerOpen" bordered content-class="bg-grey-1">
         <q-list>

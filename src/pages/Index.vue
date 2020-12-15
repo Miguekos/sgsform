@@ -17,7 +17,7 @@
         </q-card-section>
 
         <q-card-actions align="right">
-          <q-btn flat label="OK" color="primary" @click="redireccion"/>
+          <q-btn flat label="OK" color="primary" @click="redireccion" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex"
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "PageIndex",
   computed: {
@@ -35,42 +35,42 @@ export default {
     // Form: () => import("components/Form"),
     Steps: () => import("components/Steps")
   },
-  data () {
+  data() {
     return {
       mostrar: false,
       alert: false
-    }
+    };
   },
   methods: {
     ...mapActions("example", ["call_buscarConsumidor"]),
-    redireccion(){
-      this.alert = false
+    redireccion() {
+      this.alert = false;
       // this.$router.push("https://sgsacademy.pe/")
-      location.href="https://sgsacademy.pe/"
+      location.href = "https://sgsacademy.pe/";
       // this.$router.go()
-    },
+    }
   },
   async created() {
-    this.$q.loading.show()
+    this.$q.loading.show();
     this.$on("qwe", data => {
-        console.log("qwe", data);
-    })
+      console.log("qwe", data);
+    });
     if (this.$route.query.id != undefined) {
-      await this.call_buscarConsumidor(this.$route.query.id)
-    console.log(this.get_buscarConsumidor.message);
-    if (this.get_buscarConsumidor.message == "Invalid ID.") {
-      this.alert = true
-      this.mostrar = false
-      this.$q.loading.hide()
+      await this.call_buscarConsumidor(this.$route.query.id);
+      console.log(this.get_buscarConsumidor.message);
+      if (this.get_buscarConsumidor.message == "Invalid ID.") {
+        this.alert = true;
+        this.mostrar = false;
+        this.$q.loading.hide();
+      } else {
+        this.$q.loading.hide();
+        this.mostrar = true;
+      }
+      this.$q.loading.hide();
     } else {
-      this.$q.loading.hide()
-      this.mostrar = true
+      this.$q.loading.hide();
+      this.alert = true;
     }
-    this.$q.loading.hide()
-    } else {
-      this.$q.loading.hide()
-      this.alert = true
-    }    
   }
 };
 </script>
