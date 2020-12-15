@@ -523,14 +523,14 @@ export default {
     },
     lospaos() {
       console.log("this.step", this.step);
-      if (this.step == 3) {
+      if (this.step == 4) {
         console.log("this.step - dentro de if", this.step);
         // console.log("Se ejecuto guiardar");
         this.$refs.stepper.next();
         this.onSubmit();
         // this.$emit("guardarForm")
         this.$emit("qwe");
-      } else if (this.step == 4) {
+      } else if (this.step == 5) {
         location.href = "https://sgsacademy.pe/";
       } else {
         this.$refs.stepper.next();
