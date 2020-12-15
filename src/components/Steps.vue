@@ -417,7 +417,7 @@ export default {
     const array = this.get_buscarConsumidor.meta_data
     for (let index = 0; index < array.length; index++) {
       const element = array[index];
-      console.log(element.key);
+      // console.log(element.key);
       switch (element.key) {
         case "_billing_field_748":
           this.form.correoElectronico = element.value;          
