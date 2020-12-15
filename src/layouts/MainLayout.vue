@@ -13,7 +13,7 @@
         </q-toolbar>
       </q-header>
 
-       <q-banner inline-actions style="background-color: #e06b31; padding-top: 60px;" class="text-white">
+       <q-banner inline-actions style="background-color: #e06b31; padding-top: 60px; padding-left: 30px;" class="text-white">
         ZONA DE <br> MATRICULA
 
         <!-- <template v-slot:action>

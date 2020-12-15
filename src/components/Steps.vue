@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-xs">
-    <div class="row q-pa-md">
+    <div class="row">
       <div class="col-md-2 text-left q-pb-xs q-px-lg">
         Gracias por confiar en SGS Academy, <br />
         por favor favor termina tu matricula completando el siguiente
@@ -16,7 +16,7 @@
         >
           <q-step
             :name="1"
-            title="*1. Modalidad de capacitación:"
+            title="*1. Modalidad de capacitación"
             icon="settings"
             :color="step == 1 ? 'orange-14' : 'black'"
             :done="step > 1"
@@ -24,6 +24,7 @@
           >
             <q-select
               v-model="model"
+              dense
               :options="options"
               label="Selecciona tu Modalidad"
             />
@@ -31,7 +32,7 @@
 
           <q-step
             :name="2"
-            :title="`*2. ${model ? model : 'Diplomado'}`"
+            :title="`*2. Nombre del curso`"
             icon="create_new_folder"
             :color="step == 2 ? 'orange-14' : 'black'"
             :done="step > 2"
@@ -40,6 +41,7 @@
             <q-select
               v-model="model2"
               disable
+              dense
               :options="options2"
               label="Selecciona tu una opcion"
             />
@@ -74,6 +76,8 @@
                           ]"
                         />
                       </div>
+                    </div>
+                    <div class="row q-gutter-xs">
                       <div class="col">
                         <q-input
                           ref="apellidos"
@@ -90,15 +94,29 @@
                         />
                       </div>
                     </div>
-
                     <div class="row q-gutter-xs">
+                      <div class="col">
+                        <q-select
+                          ref="tipodocumento"
+                          dense
+                          v-model="form.distrito"
+                          :options="distritoOptions"
+                          label="Tip. Doc"
+                          clearable
+                          lazy-rules
+                          :rules="[
+                            val =>
+                              (val && val.length > 0) || 'Campo obligatorio'
+                          ]"
+                        />
+                      </div>
                       <div class="col">
                         <q-input
                           ref="documentIdentidad"
                           dense
                           v-model="form.documentIdentidad"
                           color="orange-14"
-                          label="DNI/CE/RUC"
+                          label="Número de documento"
                           maxlength="12"
                           counter
                           clearable
@@ -109,6 +127,8 @@
                           ]"
                         />
                       </div>
+                    </div>
+                    <div class="row q-gutter-xs">
                       <div class="col">
                         <q-input
                           ref="fechaNacimiento"
@@ -127,7 +147,6 @@
                         />
                       </div>
                     </div>
-
                     <div class="row q-gutter-xs">
                       <div class="col">
                         <q-input
@@ -145,6 +164,9 @@
                           ]"
                         />
                       </div>
+                    </div>
+
+                    <div class="row q-gutter-xs">
                       <div class="col">
                         <q-input
                           ref="teleCelular"
@@ -166,12 +188,12 @@
 
                     <div class="row q-gutter-xs">
                       <div class="col">
-                        <q-select
-                          ref="distrito"
+                        <q-input
+                          ref="pais"
                           dense
-                          v-model="form.distrito"
-                          :options="distritoOptions"
-                          label="Distrito:"
+                          v-model="form.pais"
+                          color="orange-14"
+                          label="País:"
                           clearable
                           lazy-rules
                           :rules="[
@@ -180,13 +202,33 @@
                           ]"
                         />
                       </div>
+                    </div>
+
+                    <div class="row q-gutter-xs">
+                      <div class="col">
+                        <q-select
+                          ref="region"
+                          dense
+                          v-model="form.distrito"
+                          :options="distritoOptions"
+                          label="Región:"
+                          clearable
+                          lazy-rules
+                          :rules="[
+                            val =>
+                              (val && val.length > 0) || 'Campo obligatorio'
+                          ]"
+                        />
+                      </div>
+                    </div>
+                    <div class="row q-gutter-xs">
                       <div class="col">
                         <q-select
                           ref="provincia"
                           dense
                           v-model="form.provincia"
                           :options="provinciaOptions"
-                          label="Provincia:"
+                          label="Ciudad:"
                           clearable
                           lazy-rules
                           :rules="[
@@ -195,13 +237,15 @@
                           ]"
                         />
                       </div>
+                    </div>
+                    <div class="row q-gutter-xs">
                       <div class="col">
                         <q-select
                           ref="departamento"
                           dense
                           v-model="form.departamento"
                           :options="departamentoOptions"
-                          label="Departamento:"
+                          label="Distrito:"
                           clearable
                           lazy-rules
                           :rules="[
@@ -228,46 +272,17 @@
                           ]"
                         />
                       </div>
-                      <div class="col">
-                        <q-input
-                          ref="pais"
-                          dense
-                          v-model="form.pais"
-                          color="orange-14"
-                          label="País:"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
                     </div>
 
                     <div class="row q-gutter-xs">
                       <div class="col">
-                        <q-input
-                          ref="enteraste"
-                          dense
-                          v-model="form.enteraste"
-                          color="orange-14"
-                          label="¿Cómo te enteraste del Curso/Diplomado/Programa:"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
-                      <div class="col">
+                        ¿Cómo te enteraste de SGS Academy?
                         <q-select
-                          ref="otros"
+                          ref="provincia"
                           dense
-                          v-model="form.otros"
-                          :options="options3"
-                          label="Otro (especifique)"
+                          v-model="form.provincia"
+                          :options="provinciaOptions"
+                          label="Soluciona uno"
                           clearable
                           lazy-rules
                           :rules="[
@@ -317,9 +332,60 @@
 
           <q-step
             :name="4"
-            title="4. Finalizar"
+            title="*4. Datos académicos"
             icon="add_comment"
             :color="step == 4 ? 'orange-14' : 'black'"
+            :style="$q.screen.xs ? '' : stilo"
+          >
+            <div style="text-align: center;">
+              <q-input
+                ref="enteraste"
+                dense
+                v-model="form.enteraste"
+                color="orange-14"
+                label="Industria o giro"
+                clearable
+                lazy-rules
+                :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
+              />
+              <q-input
+                ref="enteraste"
+                dense
+                v-model="form.enteraste"
+                color="orange-14"
+                label="Área donde trabaja"
+                clearable
+                lazy-rules
+                :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
+              />
+              <q-input
+                ref="enteraste"
+                dense
+                v-model="form.enteraste"
+                color="orange-14"
+                label="Cargo o puesto"
+                clearable
+                lazy-rules
+                :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
+              />
+              <q-input
+                ref="enteraste"
+                dense
+                v-model="form.enteraste"
+                color="orange-14"
+                label="Contro  de trabajo"
+                clearable
+                lazy-rules
+                :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
+              />
+            </div>
+          </q-step>
+
+          <q-step
+            :name="5"
+            title="*5. Finalizar"
+            icon="add_comment"
+            :color="step == 5 ? 'orange-14' : 'black'"
             :style="$q.screen.xs ? '' : stilo"
           >
             <div style="text-align: center;">
@@ -360,7 +426,6 @@
       </template> -->
         </q-stepper>
       </div>
-
       <div class="col-md-2"></div>
     </div>
   </div>
@@ -458,14 +523,14 @@ export default {
     },
     lospaos() {
       console.log("this.step", this.step);
-      if (this.step == 3) {
+      if (this.step == 4) {
         console.log("this.step - dentro de if", this.step);
         // console.log("Se ejecuto guiardar");
         this.$refs.stepper.next();
         this.onSubmit();
         // this.$emit("guardarForm")
         this.$emit("qwe");
-      } else if (this.step == 4) {
+      } else if (this.step == 5) {
         location.href = "https://sgsacademy.pe/";
       } else {
         this.$refs.stepper.next();
