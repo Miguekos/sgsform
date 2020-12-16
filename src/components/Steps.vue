@@ -16,8 +16,8 @@
         >
           <q-step
             :name="1"
-            title="*1. Modalidad de capacitación"
-            icon="settings"
+            title="*Modalidad de capacitación"
+            icon="looks_one"
             :color="step == 1 ? 'orange-14' : 'black'"
             :done="step > 1"
             :style="$q.screen.xs ? '' : stilo"
@@ -32,8 +32,8 @@
 
           <q-step
             :name="2"
-            :title="`*2. Nombre del curso`"
-            icon="create_new_folder"
+            :title="`*Nombre del curso`"
+            icon="looks_two"
             :color="step == 2 ? 'orange-14' : 'black'"
             :done="step > 2"
             :style="$q.screen.xs ? '' : stilo"
@@ -49,8 +49,8 @@
 
           <q-step
             :name="3"
-            title="*3. Datos personales"
-            icon="assignment"
+            title="*Datos personales"
+            icon="looks_3"
             :color="step == 3 ? 'orange-14' : 'black'"
             :done="step > 3"
             :style="$q.screen.xs ? '' : stilo"
@@ -332,8 +332,8 @@
 
           <q-step
             :name="4"
-            title="*4. Datos académicos"
-            icon="add_comment"
+            title="*Datos académicos"
+            icon="looks_4"
             :color="step == 4 ? 'orange-14' : 'black'"
             :style="$q.screen.xs ? '' : stilo"
           >
@@ -383,8 +383,8 @@
 
           <q-step
             :name="5"
-            title="*5. Finalizar"
-            icon="add_comment"
+            title="*Finalizar"
+            icon="looks_5"
             :color="step == 5 ? 'orange-14' : 'black'"
             :style="$q.screen.xs ? '' : stilo"
           >
