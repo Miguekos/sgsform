@@ -1,16 +1,27 @@
 <template>
   <div class="q-pa-xs">
+      <div id="probar" v-if="!$q.screen.xs" class="q-pa-lg" style="text-align: center; text-align: -webkit-center;">
+         Gracias por confiar en SGS Academy, 
+        por favor favor termina tu matricula completando el siguiente
+        formulario.
+      </div>
     <div class="row">
-      <div class="col-md-2 text-left q-pb-xs q-px-lg">
+
+      
+      <div v-if="$q.screen.xs" class="col-md-2 text-left q-pb-xs q-px-lg">
         Gracias por confiar en SGS Academy, <br />
         por favor favor termina tu matricula completando el siguiente
         formulario.
       </div>
-      <div class="col-md-8 col-xs-12">
+      <!-- <div class="col-md-2 text-left q-pb-xs q-px-lg"> -->
+        <!-- Gracias por confiar en SGS Academy, <br />
+        por favor favor termina tu matricula completando el siguiente
+        formulario. -->
+      <!-- </div> -->
+      <div class="col-md-12 col-xs-12">
         <q-stepper
           v-model="step"
           ref="stepper"
-          :alternative-labels="true"
           color="orange-14"
           animated
           swipeable
@@ -466,7 +477,7 @@ export default {
     return {
       shape: true,
       terminos: false,
-      stilo: "min-height: 68vh",
+      stilo: "min-height: 48vh",
       loadboton: false,
       form: {
         nombres: this.nombre,
