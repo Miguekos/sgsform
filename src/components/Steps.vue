@@ -493,7 +493,7 @@ export default {
         "Dip. en Especialización Avanzada en Gestión de Procesos",
         "Dip. en Gestión Ambiental para Organizaciones Sostenibles"
       ],
-      options_tipodoc : ["C.I", "C.E", "RUC"],
+      options_tipodoc : ["DNI", "C.E", "RUC"],
       options3: [
         "Facebook",
         "Instagram",
