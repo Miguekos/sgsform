@@ -79,8 +79,21 @@ module.exports = function (/* ctx */) {
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: "material-icons", // Quasar icon set
-      lang: "en-us", // Quasar language pack
-      config: {},
+      lang: "es", // Quasar language pack
+      config: {
+        // optional (v0.17+)
+        loading: {
+          // Loading defaults
+          // spinner: QSpinnerGears,
+          // message: "<div class='my-class-new'><b class='text-green'>C</b>uid<b class='text-red'>APP</b>te</div>",
+          message: "<div id='corazon'><img style='height: 110px; max-width: 120px;' src='https://api.apps.com.pe/fileserver/uploads/sgs-logo-white.png'></img><div class='text-center text-bold text-h6 text-orange-14'>Cargando..</div></div>",
+          // messageColor: "white",
+          spinnerSize: 1, // in pixels
+          // spinnerColor: "orange-14",
+          // customClass: "bg-grey-2",
+          // sanitize: true
+        }
+      },
 
       // Possible values for "importStrategy":
       // * 'auto' - (DEFAULT) Auto-import needed Quasar components & directives
