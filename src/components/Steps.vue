@@ -10,32 +10,35 @@
         <q-stepper
           v-model="step"
           ref="stepper"
+          :alternative-labels="true"
           color="orange-14"
           animated
+          swipeable
           :vertical="$q.screen.xs"
         >
           <q-step
             :name="1"
             title="*Modalidad de capacitación"
-            icon="looks_one"
+            prefix="1"
             :color="step == 1 ? 'orange-14' : 'black'"
-            :done="step > 1"
             :style="$q.screen.xs ? '' : stilo"
           >
             <q-select
               v-model="model"
               dense
+              disable
               :options="options"
               label="Selecciona tu Modalidad"
             />
           </q-step>
-
+<!-- fas fa-ambulance -->
+<!-- ion-heart -->
+<!-- icon="mdi-numeric-2" -->
           <q-step
             :name="2"
             :title="`*Nombre del curso`"
-            icon="looks_two"
+            prefix="2"
             :color="step == 2 ? 'orange-14' : 'black'"
-            :done="step > 2"
             :style="$q.screen.xs ? '' : stilo"
           >
             <q-select
@@ -50,16 +53,15 @@
           <q-step
             :name="3"
             title="*Datos personales"
-            icon="looks_3"
+            prefix="3"
             :color="step == 3 ? 'orange-14' : 'black'"
-            :done="step > 3"
             :style="$q.screen.xs ? '' : stilo"
           >
             <div class="">
               <div class="row">
                 <div class="col">
                   <!-- {{get_buscarConsumidor}} -->
-                  <q-form @submit="onSubmit" class="q-gutter-md">
+                  <!-- <q-form @submit="onSubmit" class="q-gutter-md"> -->
                     <div class="row q-gutter-xs">
                       <div class="col">
                         <q-input
@@ -99,8 +101,9 @@
                         <q-select
                           ref="tipodocumento"
                           dense
-                          v-model="form.distrito"
-                          :options="distritoOptions"
+                          color="orange-14"
+                          v-model="form.tipodocumento"
+                          :options="options_tipodoc"
                           label="Tip. Doc"
                           clearable
                           lazy-rules
@@ -209,7 +212,8 @@
                         <q-select
                           ref="region"
                           dense
-                          v-model="form.distrito"
+                          color="orange-14"
+                          v-model="form.region"
                           :options="distritoOptions"
                           label="Región:"
                           clearable
@@ -224,9 +228,10 @@
                     <div class="row q-gutter-xs">
                       <div class="col">
                         <q-select
-                          ref="provincia"
+                          ref="ciudad"
                           dense
-                          v-model="form.provincia"
+                          color="orange-14"
+                          v-model="form.ciudad"
                           :options="provinciaOptions"
                           label="Ciudad:"
                           clearable
@@ -241,10 +246,11 @@
                     <div class="row q-gutter-xs">
                       <div class="col">
                         <q-select
-                          ref="departamento"
+                          ref="distrito"
                           dense
-                          v-model="form.departamento"
-                          :options="departamentoOptions"
+                          color="orange-14"
+                          v-model="form.distrito"
+                          :options="distritoOptions"
                           label="Distrito:"
                           clearable
                           lazy-rules
@@ -278,10 +284,11 @@
                       <div class="col">
                         ¿Cómo te enteraste de SGS Academy?
                         <q-select
-                          ref="provincia"
+                          ref="enterarte"
                           dense
-                          v-model="form.provincia"
-                          :options="provinciaOptions"
+                          color="orange-14"
+                          v-model="form.enterarte"
+                          :options="options3"
                           label="Soluciona uno"
                           clearable
                           lazy-rules
@@ -303,8 +310,8 @@
                   />
                   <q-btn label="Reset" type="reset" size="sm" color="orange-14" />
                 </div> -->
-                  </q-form>
-                  <q-card
+                  <!-- </q-form> -->
+                  <!-- <q-card
                     v-if="submitResult.length > 0"
                     flat
                     bordered
@@ -324,7 +331,7 @@
                         {{ item.name }} = {{ item.value }}
                       </div>
                     </q-card-section>
-                  </q-card>
+                  </q-card> -->
                 </div>
               </div>
             </div>
@@ -333,15 +340,15 @@
           <q-step
             :name="4"
             title="*Datos académicos"
-            icon="looks_4"
+            prefix="4"
             :color="step == 4 ? 'orange-14' : 'black'"
             :style="$q.screen.xs ? '' : stilo"
           >
             <div style="text-align: center;">
               <q-input
-                ref="enteraste"
+                ref="Industriaogiro"
                 dense
-                v-model="form.enteraste"
+                v-model="form.Industriaogiro"
                 color="orange-14"
                 label="Industria o giro"
                 clearable
@@ -349,9 +356,9 @@
                 :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
               />
               <q-input
-                ref="enteraste"
+                ref="areadondetrabaja"
                 dense
-                v-model="form.enteraste"
+                v-model="form.areadondetrabaja"
                 color="orange-14"
                 label="Área donde trabaja"
                 clearable
@@ -359,9 +366,9 @@
                 :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
               />
               <q-input
-                ref="enteraste"
+                ref="Cargoopuesto"
                 dense
-                v-model="form.enteraste"
+                v-model="form.Cargoopuesto"
                 color="orange-14"
                 label="Cargo o puesto"
                 clearable
@@ -369,9 +376,9 @@
                 :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
               />
               <q-input
-                ref="enteraste"
+                ref="Controdetrabajo"
                 dense
-                v-model="form.enteraste"
+                v-model="form.Controdetrabajo"
                 color="orange-14"
                 label="Contro  de trabajo"
                 clearable
@@ -384,16 +391,31 @@
           <q-step
             :name="5"
             title="*Finalizar"
-            icon="looks_5"
+            prefix="5"
             :color="step == 5 ? 'orange-14' : 'black'"
             :style="$q.screen.xs ? '' : stilo"
           >
-            <div style="text-align: center;">
-              <span style="margin: 0px 0px 0px 0px;">
-                <img width="100px" class="q-mt-sm" src="sgs-logo.png" alt="" />
-              </span>
-              <div class="text-h5">
-                Registro correcto
+            <div style="text-align: left;">
+
+              <div class="q-gutter-sm">
+                <q-checkbox  color="orange-14" v-model="terminos" label="Aceplos teminos y condiciones" />
+              </div>
+              <q-separator spaced inset vertical dark />
+              <br>
+              <div class="">
+                ¿Desea recibir informacion, promociones y/o descuientos sobre SGS Academy?
+                 <div class="">
+                  <div class="">
+                    
+                    <q-radio keep-color v-model="form.shapeRecibirinfo" val="si" label="Si" color="orange" />
+                    
+                  </div>
+                  <div class="">
+                    
+                    <q-radio keep-color v-model="form.shapeRecibirinfo" val="no" label="No" color="orange" />
+                    
+                  </div>
+                </div>
               </div>
             </div>
           </q-step>
@@ -403,10 +425,10 @@
               <q-btn
                 @click="lospaos()"
                 color="orange-14"
-                :label="step === 4 ? 'Terminar' : 'Continuar'"
+                :label="step === 5 ? 'Terminar' : 'Continuar'"
               />
               <q-btn
-                v-if="step > 1 && step < 4"
+                v-if="step > 1 && step < 5"
                 flat
                 color="orange-14"
                 @click="$refs.stepper.previous()"
@@ -442,6 +464,8 @@ export default {
   },
   data() {
     return {
+      shape: true,
+      terminos: false,
       stilo: "min-height: 68vh",
       loadboton: false,
       form: {
@@ -469,6 +493,7 @@ export default {
         "Dip. en Especialización Avanzada en Gestión de Procesos",
         "Dip. en Gestión Ambiental para Organizaciones Sostenibles"
       ],
+      options_tipodoc : ["C.I", "C.E", "RUC"],
       options3: [
         "Facebook",
         "Instagram",
@@ -480,7 +505,7 @@ export default {
       distritoOptions: ["Lima"],
       provinciaOptions: ["Lima"],
       departamentoOptions: ["Lima"],
-      model: "",
+      model: "Diplomado",
       model2: "",
       model3: "",
       step: 1
@@ -523,16 +548,19 @@ export default {
     },
     lospaos() {
       console.log("this.step", this.step);
-      if (this.step == 4) {
+      if (this.step == 5) {
         console.log("this.step - dentro de if", this.step);
         // console.log("Se ejecuto guiardar");
         this.$refs.stepper.next();
         this.onSubmit();
         // this.$emit("guardarForm")
         this.$emit("qwe");
-      } else if (this.step == 5) {
         location.href = "https://sgsacademy.pe/";
-      } else {
+      } 
+      // else if (this.step == 5) {
+      //   location.href = "https://sgsacademy.pe/";
+      // } 
+      else {
         this.$refs.stepper.next();
       }
     }
