@@ -1,20 +1,22 @@
 <template>
   <div class="q-pa-xs">
-      <div id="probar" v-if="!$q.screen.xs" class="q-pa-lg" style="text-align: center; text-align: -webkit-center;">
-         Gracias por confiar en SGS Academy, 
-        por favor favor termina tu matricula completando el siguiente
-        formulario.
-      </div>
+    <div
+      id="probar"
+      v-if="!$q.screen.xs"
+      class="q-pa-lg"
+      style="text-align: center; text-align: -webkit-center;"
+    >
+      Gracias por confiar en SGS Academy, por favor favor termina tu matricula
+      completando el siguiente formulario.
+    </div>
     <div class="row">
-
-      
       <div v-if="$q.screen.xs" class="col-md-2 text-left q-pb-xs q-px-lg">
         Gracias por confiar en SGS Academy, <br />
         por favor favor termina tu matricula completando el siguiente
         formulario.
       </div>
       <!-- <div class="col-md-2 text-left q-pb-xs q-px-lg"> -->
-        <!-- Gracias por confiar en SGS Academy, <br />
+      <!-- Gracias por confiar en SGS Academy, <br />
         por favor favor termina tu matricula completando el siguiente
         formulario. -->
       <!-- </div> -->
@@ -42,9 +44,9 @@
               label="Selecciona tu Modalidad"
             />
           </q-step>
-<!-- fas fa-ambulance -->
-<!-- ion-heart -->
-<!-- icon="mdi-numeric-2" -->
+          <!-- fas fa-ambulance -->
+          <!-- ion-heart -->
+          <!-- icon="mdi-numeric-2" -->
           <q-step
             :name="2"
             :title="`*Nombre del curso`"
@@ -73,245 +75,232 @@
                 <div class="col">
                   <!-- {{get_buscarConsumidor}} -->
                   <!-- <q-form @submit="onSubmit" class="q-gutter-md"> -->
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-input
-                          ref="nombres"
-                          dense
-                          v-model="form.nombres"
-                          color="orange-14"
-                          label="Nombres"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-input
+                        ref="nombres"
+                        dense
+                        v-model="form.nombres"
+                        color="orange-14"
+                        label="Nombres"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-input
-                          ref="apellidos"
-                          dense
-                          v-model="form.apellidos"
-                          color="orange-14"
-                          label="Apellidos"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-input
+                        ref="apellidos"
+                        dense
+                        v-model="form.apellidos"
+                        color="orange-14"
+                        label="Apellidos"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-select
-                          ref="tipodocumento"
-                          dense
-                          color="orange-14"
-                          v-model="form.tipodocumento"
-                          :options="options_tipodoc"
-                          label="Tip. Doc"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
-                      <div class="col">
-                        <q-input
-                          ref="documentIdentidad"
-                          dense
-                          v-model="form.documentIdentidad"
-                          color="orange-14"
-                          label="Número de documento"
-                          maxlength="12"
-                          counter
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-select
+                        ref="tipodocumento"
+                        dense
+                        color="orange-14"
+                        v-model="form.tipodocumento"
+                        :options="options_tipodoc"
+                        label="Tip. Doc"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-input
-                          ref="fechaNacimiento"
-                          dense
-                          v-model="form.fechaNacimiento"
-                          color="orange-14"
-                          label="Fecha de nacimiento:"
-                          placeholder="DD/MM/AAAA"
-                          counter
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                    <div class="col">
+                      <q-input
+                        ref="documentIdentidad"
+                        dense
+                        v-model="form.documentIdentidad"
+                        color="orange-14"
+                        label="Número de documento"
+                        maxlength="12"
+                        counter
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-input
-                          ref="correoElectronico"
-                          dense
-                          v-model="form.correoElectronico"
-                          color="orange-14"
-                          label="Correo electrónico"
-                          counter
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-input
+                        ref="fechaNacimiento"
+                        dense
+                        v-model="form.fechaNacimiento"
+                        color="orange-14"
+                        label="Fecha de nacimiento:"
+                        placeholder="DD/MM/AAAA"
+                        counter
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
+                  </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-input
+                        ref="correoElectronico"
+                        dense
+                        v-model="form.correoElectronico"
+                        color="orange-14"
+                        label="Correo electrónico"
+                        counter
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
+                    </div>
+                  </div>
 
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-input
-                          ref="teleCelular"
-                          dense
-                          v-model="form.teleCelular"
-                          color="orange-14"
-                          label="N° de celular"
-                          maxlength="9"
-                          counter
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-input
+                        ref="teleCelular"
+                        dense
+                        v-model="form.teleCelular"
+                        color="orange-14"
+                        label="N° de celular"
+                        maxlength="9"
+                        counter
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
+                  </div>
 
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-input
-                          ref="pais"
-                          dense
-                          v-model="form.pais"
-                          color="orange-14"
-                          label="País:"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-input
+                        ref="pais"
+                        dense
+                        v-model="form.pais"
+                        color="orange-14"
+                        label="País:"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
+                  </div>
 
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-select
-                          ref="region"
-                          dense
-                          color="orange-14"
-                          v-model="form.region"
-                          :options="distritoOptions"
-                          label="Región:"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-select
+                        ref="region"
+                        dense
+                        color="orange-14"
+                        v-model="form.region"
+                        :options="distritoOptions"
+                        label="Región:"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-select
-                          ref="ciudad"
-                          dense
-                          color="orange-14"
-                          v-model="form.ciudad"
-                          :options="provinciaOptions"
-                          label="Ciudad:"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-select
+                        ref="ciudad"
+                        dense
+                        color="orange-14"
+                        v-model="form.ciudad"
+                        :options="provinciaOptions"
+                        label="Ciudad:"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-select
-                          ref="distrito"
-                          dense
-                          color="orange-14"
-                          v-model="form.distrito"
-                          :options="distritoOptions"
-                          label="Distrito:"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-select
+                        ref="distrito"
+                        dense
+                        color="orange-14"
+                        v-model="form.distrito"
+                        :options="distritoOptions"
+                        label="Distrito:"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
+                  </div>
 
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        <q-input
-                          ref="direccion"
-                          dense
-                          v-model="form.direccion"
-                          color="orange-14"
-                          label="Direccion"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      <q-input
+                        ref="direccion"
+                        dense
+                        v-model="form.direccion"
+                        color="orange-14"
+                        label="Direccion"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
+                  </div>
 
-                    <div class="row q-gutter-xs">
-                      <div class="col">
-                        ¿Cómo te enteraste de SGS Academy?
-                        <q-select
-                          ref="enterarte"
-                          dense
-                          color="orange-14"
-                          v-model="form.enterarte"
-                          :options="options3"
-                          label="Soluciona uno"
-                          clearable
-                          lazy-rules
-                          :rules="[
-                            val =>
-                              (val && val.length > 0) || 'Campo obligatorio'
-                          ]"
-                        />
-                      </div>
+                  <div class="row q-gutter-xs">
+                    <div class="col">
+                      ¿Cómo te enteraste de SGS Academy?
+                      <q-select
+                        ref="enterarte"
+                        dense
+                        color="orange-14"
+                        v-model="form.enterarte"
+                        :options="options3"
+                        label="Soluciona uno"
+                        clearable
+                        lazy-rules
+                        :rules="[
+                          val => (val && val.length > 0) || 'Campo obligatorio'
+                        ]"
+                      />
                     </div>
+                  </div>
 
-                    <!-- <div align="center" class="q-gutter-lg">
+                  <!-- <div align="center" class="q-gutter-lg">
                   <q-btn
                     label="Enviar"
                     :loading="loadboton"
@@ -401,30 +390,92 @@
 
           <q-step
             :name="5"
-            title="*Finalizar"
+            title="*Metodo de pago"
             prefix="5"
             :color="step == 5 ? 'orange-14' : 'black'"
             :style="$q.screen.xs ? '' : stilo"
           >
-            <div style="text-align: left;">
-
-              <div class="q-gutter-sm">
-                <q-checkbox  color="orange-14" v-model="terminos" label="Aceplos teminos y condiciones" />
+            <div style="text-align: center;">
+              Por favor elige el comprobante de pago de tu preferencia:
+              <div class="">
+                <div class="q-gutter-sm">
+                  <q-radio
+                    v-model="shape"
+                    color="orange"
+                    val="Boleta"
+                    label="Boleta"
+                  />
+                  <q-radio
+                    v-model="shape"
+                    color="orange"
+                    val="Factura"
+                    label="Factura"
+                  />
+                </div>
               </div>
               <q-separator spaced inset vertical dark />
-              <br>
               <div class="">
-                ¿Desea recibir informacion, promociones y/o descuientos sobre SGS Academy?
-                 <div class="">
+                <div class="q-gutter-sm">
+                  <q-input color="orange" v-model="ruc" label="R.U.C" />
+                  <q-input
+                    color="orange"
+                    v-model="razonsocial"
+                    label="Razon Social"
+                  />
+                  <q-input
+                    color="orange"
+                    v-model="DireccionFiscal"
+                    label="Dirección Fiscal"
+                  />
+                  <q-input color="orange" v-model="Nombre" label="Nombre" />
+                  <q-input
+                    color="orange"
+                    v-model="Numerodecelular"
+                    label="Celular"
+                  />
+                </div>
+              </div>
+            </div>
+          </q-step>
+
+          <q-step
+            :name="6"
+            title="*Finalizar"
+            prefix="6"
+            :color="step == 6 ? 'orange-14' : 'black'"
+            :style="$q.screen.xs ? '' : stilo"
+          >
+            <div style="text-align: left;">
+              <div class="q-gutter-sm">
+                <q-checkbox
+                  color="orange-14"
+                  v-model="terminos"
+                  label="Aceplos teminos y condiciones"
+                />
+              </div>
+              <q-separator spaced inset vertical dark />
+              <br />
+              <div class="">
+                ¿Desea recibir informacion, promociones y/o descuientos sobre
+                SGS Academy?
+                <div class="">
                   <div class="">
-                    
-                    <q-radio keep-color v-model="form.shapeRecibirinfo" val="si" label="Si" color="orange" />
-                    
+                    <q-radio
+                      keep-color
+                      v-model="form.shapeRecibirinfo"
+                      val="si"
+                      label="Si"
+                      color="orange"
+                    />
                   </div>
                   <div class="">
-                    
-                    <q-radio keep-color v-model="form.shapeRecibirinfo" val="no" label="No" color="orange" />
-                    
+                    <q-radio
+                      keep-color
+                      v-model="form.shapeRecibirinfo"
+                      val="no"
+                      label="No"
+                      color="orange"
+                    />
                   </div>
                 </div>
               </div>
@@ -436,10 +487,10 @@
               <q-btn
                 @click="lospaos()"
                 color="orange-14"
-                :label="step === 5 ? 'Terminar' : 'Continuar'"
+                :label="step === 6 ? 'Terminar' : 'Continuar'"
               />
               <q-btn
-                v-if="step > 1 && step < 5"
+                v-if="step > 1 && step < 6"
                 flat
                 color="orange-14"
                 @click="$refs.stepper.previous()"
@@ -475,6 +526,12 @@ export default {
   },
   data() {
     return {
+      ruc: "",
+      razonsocial: "",
+      DireccionFiscal: "",
+      Nombre: "",
+      Numerodecelular: "",
+      radio: "Boleta",
       shape: true,
       terminos: false,
       stilo: "min-height: 48vh",
@@ -504,7 +561,7 @@ export default {
         "Dip. en Especialización Avanzada en Gestión de Procesos",
         "Dip. en Gestión Ambiental para Organizaciones Sostenibles"
       ],
-      options_tipodoc : ["DNI", "C.E", "RUC"],
+      options_tipodoc: ["DNI", "C.E", "RUC"],
       options3: [
         "Facebook",
         "Instagram",
@@ -559,7 +616,7 @@ export default {
     },
     lospaos() {
       console.log("this.step", this.step);
-      if (this.step == 5) {
+      if (this.step == 6) {
         console.log("this.step - dentro de if", this.step);
         // console.log("Se ejecuto guiardar");
         this.$refs.stepper.next();
@@ -567,10 +624,10 @@ export default {
         // this.$emit("guardarForm")
         this.$emit("qwe");
         location.href = "https://sgsacademy.pe/";
-      } 
+      }
       // else if (this.step == 5) {
       //   location.href = "https://sgsacademy.pe/";
-      // } 
+      // }
       else {
         this.$refs.stepper.next();
       }
