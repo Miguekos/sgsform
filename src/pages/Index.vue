@@ -26,6 +26,17 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import {
+  Loading,
+
+  // optional!, for example below
+  // with custom spinner
+  QSpinnerGears,
+  QSpinnerTail,
+  QSpinnerRings,
+  QSpinnerPuff,
+  QSpinnerBall
+} from "quasar";
 export default {
   name: "PageIndex",
   computed: {
@@ -51,7 +62,11 @@ export default {
     }
   },
   async created() {
-    this.$q.loading.show();
+    this.$q.loading.show({
+      spinner: QSpinnerTail,
+      spinnerColor: 'orange-10',
+      spinnerSize: 150
+    });
     this.$on("qwe", data => {
       console.log("qwe", data);
     });
