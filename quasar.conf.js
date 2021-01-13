@@ -7,7 +7,7 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
 
-module.exports = function (/* ctx */) {
+module.exports = function(/* ctx */) {
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -25,10 +25,10 @@ module.exports = function (/* ctx */) {
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
-      'ionicons-v4',
+      "ionicons-v4",
 
-      'mdi-v5',
-      'fontawesome-v5',
+      "mdi-v5",
+      "fontawesome-v5",
       // 'eva-icons',
       // 'themify',
       // 'line-awesome',
@@ -82,17 +82,17 @@ module.exports = function (/* ctx */) {
       lang: "es", // Quasar language pack
       config: {
         // optional (v0.17+)
-        loading: {
-          // Loading defaults
-          // spinner: QSpinnerGears,
-          // message: "<div class='my-class-new'><b class='text-green'>C</b>uid<b class='text-red'>APP</b>te</div>",
-          message: "<div id='corazon'><img style='height: 110px; max-width: 120px;' src='https://api.apps.com.pe/fileserver/uploads/sgs-logo-white.png'></img><div class='text-center text-bold text-h6 text-orange-14'>Cargando..</div></div>",
-          // messageColor: "white",
-          spinnerSize: 1, // in pixels
-          // spinnerColor: "orange-14",
-          // customClass: "bg-grey-2",
-          // sanitize: true
-        }
+        // loading: {
+        // Loading defaults
+        // spinner: QSpinnerGears,
+        // message: "<div class='my-class-new'><b class='text-green'>C</b>uid<b class='text-red'>APP</b>te</div>",
+        // message: "<div id='corazon'><img style='height: 110px; max-width: 120px;' src='https://api.apps.com.pe/fileserver/uploads/sgs-logo-white.png'></img><div class='text-center text-bold text-h6 text-orange-14'>Cargando..</div></div>",
+        // messageColor: "white",
+        // spinnerSize: 1, // in pixels
+        // spinnerColor: "orange-14",
+        // customClass: "bg-grey-2",
+        // sanitize: true
+        //   }
       },
 
       // Possible values for "importStrategy":
