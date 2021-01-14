@@ -9,7 +9,7 @@
       Gracias por confiar en SGS Academy, por favor favor termina tu matricula
       completando el siguiente formulario.
     </div>
-    <div class="row">
+    <div :class="$q.screen.xs ? '' : 'justify-center'" class="row">
       <div v-if="$q.screen.xs" class="col-md-2 text-left q-pb-xs q-px-lg">
         Gracias por confiar en SGS Academy, <br />
         por favor favor termina tu matricula completando el siguiente
@@ -20,7 +20,8 @@
         por favor favor termina tu matricula completando el siguiente
         formulario. -->
       <!-- </div> -->
-      <div class="col-md-12 col-xs-12">
+      <div class="col-md-2"></div>
+      <div class="col-md-8 col-xs-12" style="width: 85%">
         <q-stepper
           v-model="step"
           ref="stepper"
@@ -44,9 +45,7 @@
               label="Selecciona tu Modalidad"
             />
           </q-step>
-          <!-- fas fa-ambulance -->
-          <!-- ion-heart -->
-          <!-- icon="mdi-numeric-2" -->
+
           <q-step
             :name="2"
             :title="`*Nombre del curso`"
@@ -143,19 +142,53 @@
                   <div class="row q-gutter-xs">
                     <div class="col">
                       <q-input
+                        label="Fecha de nacimiento"
                         ref="fechaNacimiento"
                         dense
-                        v-model="form.fechaNacimiento"
                         color="orange-14"
-                        label="Fecha de nacimiento:"
-                        placeholder="DD/MM/AAAA"
-                        counter
-                        clearable
-                        lazy-rules
-                        :rules="[
-                          val => (val && val.length > 0) || 'Campo obligatorio'
-                        ]"
-                      />
+                        v-model="form.fechaNacimiento"
+                        mask="date"
+                        :rules="['date']"
+                      >
+                        <template v-slot:append>
+                          <q-icon name="event" class="cursor-pointer">
+                            <q-popup-proxy
+                              ref="qDateProxy"
+                              transition-show="scale"
+                              transition-hide="scale"
+                            >
+                              <q-date
+                                default-view="Years"
+                                color="orange-14"
+                                v-model="form.fechaNacimiento"
+                              >
+                                <div class="row items-center justify-end">
+                                  <q-btn
+                                    v-close-popup
+                                    label="Close"
+                                    color="primary"
+                                    flat
+                                  />
+                                </div>
+                              </q-date>
+                            </q-popup-proxy>
+                          </q-icon>
+                        </template>
+                      </q-input>
+                      <!--                      <q-input-->
+                      <!--                        ref="fechaNacimiento"-->
+                      <!--                        dense-->
+                      <!--                        v-model="form.fechaNacimiento"-->
+                      <!--                        color="orange-14"-->
+                      <!--                        label="Fecha de nacimiento:"-->
+                      <!--                        placeholder="DD/MM/AAAA"-->
+                      <!--                        counter-->
+                      <!--                        clearable-->
+                      <!--                        lazy-rules-->
+                      <!--                        :rules="[-->
+                      <!--                          val => (val && val.length > 0) || 'Campo obligatorio'-->
+                      <!--                        ]"-->
+                      <!--                      />-->
                     </div>
                   </div>
                   <div class="row q-gutter-xs">
@@ -214,12 +247,18 @@
 
                   <div class="row q-gutter-xs">
                     <div class="col">
+                      <!--                      {{ get_depart.result }}-->
                       <q-select
                         ref="region"
                         dense
                         color="orange-14"
+                        @input="getProv"
                         v-model="form.region"
-                        :options="distritoOptions"
+                        :options="get_depart.result"
+                        option-label="name"
+                        option-value="id"
+                        emit-value
+                        map-options
                         label="Región:"
                         clearable
                         lazy-rules
@@ -231,12 +270,18 @@
                   </div>
                   <div class="row q-gutter-xs">
                     <div class="col">
+                      <!--                      {{ get_provin.result }}-->
                       <q-select
                         ref="ciudad"
                         dense
                         color="orange-14"
+                        @input="getDistri"
                         v-model="form.ciudad"
-                        :options="provinciaOptions"
+                        :options="get_provin.result"
+                        option-value="id"
+                        option-label="name"
+                        emit-value
+                        map-options
                         label="Ciudad:"
                         clearable
                         lazy-rules
@@ -253,7 +298,11 @@
                         dense
                         color="orange-14"
                         v-model="form.distrito"
-                        :options="distritoOptions"
+                        :options="get_distridistri.result"
+                        option-value="id"
+                        option-label="name"
+                        emit-value
+                        map-options
                         label="Distrito:"
                         clearable
                         lazy-rules
@@ -376,11 +425,11 @@
                 :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
               />
               <q-input
-                ref="Controdetrabajo"
+                ref="Centrodetrabajo"
                 dense
-                v-model="form.Controdetrabajo"
+                v-model="form.Centrodetrabajo"
                 color="orange-14"
-                label="Contro  de trabajo"
+                label="Centro  de trabajo"
                 clearable
                 lazy-rules
                 :rules="[val => (val && val.length > 0) || 'Campo obligatorio']"
@@ -395,18 +444,18 @@
             :color="step == 5 ? 'orange-14' : 'black'"
             :style="$q.screen.xs ? '' : stilo"
           >
-            <div style="text-align: center;">
+            <div style="text-align: left;">
               Por favor elige el comprobante de pago de tu preferencia:
               <div class="">
                 <div class="q-gutter-sm">
                   <q-radio
-                    v-model="shape"
+                    v-model="radio"
                     color="orange"
                     val="Boleta"
                     label="Boleta"
                   />
                   <q-radio
-                    v-model="shape"
+                    v-model="radio"
                     color="orange"
                     val="Factura"
                     label="Factura"
@@ -415,20 +464,29 @@
               </div>
               <q-separator spaced inset vertical dark />
               <div class="">
-                <div class="q-gutter-sm">
-                  <q-input color="orange" v-model="ruc" label="R.U.C" />
+                <!--                {{ radio }}-->
+                <div v-if="radio === 'Factura'" class="q-gutter-sm">
+                  <q-input dense color="orange" v-model="ruc" label="R.U.C" />
                   <q-input
+                    dense
                     color="orange"
                     v-model="razonsocial"
                     label="Razon Social"
                   />
                   <q-input
+                    dense
                     color="orange"
                     v-model="DireccionFiscal"
                     label="Dirección Fiscal"
                   />
-                  <q-input color="orange" v-model="Nombre" label="Nombre" />
                   <q-input
+                    dense
+                    color="orange"
+                    v-model="Nombre"
+                    label="Nombre"
+                  />
+                  <q-input
+                    dense
                     color="orange"
                     v-model="Numerodecelular"
                     label="Celular"
@@ -512,14 +570,21 @@
       </div>
       <div class="col-md-2"></div>
     </div>
+    <!--    {{ $data.form }}-->
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
 import { addRegistro } from "../store/module-example/actions";
+
 export default {
   computed: {
-    ...mapGetters("example", ["get_buscarConsumidor"])
+    ...mapGetters("example", [
+      "get_buscarConsumidor",
+      "get_depart",
+      "get_provin",
+      "get_distridistri"
+    ])
   },
   components: {
     // Form: () => import("components/NewForm")
@@ -542,14 +607,18 @@ export default {
         documentIdentidad: this.documentIdentida,
         teleCelular: this.teleCelula,
         direccion: this.direccio,
+        ciudad: this.ciudad ? this.ciudad : "",
+        tipodocumento: this.tipodocumento ? this.tipodocumento : "",
         metodosDePagos: this.metodosDePago,
-        fechaNacimiento: this.fechaNacimiento,
+        fechaNacimiento: this.fechaNacimiento ? this.fechaNacimiento : "",
         correoElectronico: this.correoElectronico,
-        distrito: this.distrito,
+        distrito: this.distrito ? this.distrito : "",
         provincia: this.provincia,
         departamento: this.departamento,
         pais: "PERU",
-        enteraste: this.enteraste,
+        enterarte: this.enteraste ? this.enteraste : "",
+        enteraste: this.enteraste ? this.enteraste : "",
+        region: this.region ? this.region : "",
         otros: this.otros
       },
       submitResult: [],
@@ -580,7 +649,22 @@ export default {
     };
   },
   methods: {
-    ...mapActions("example", ["addRegistro", "getRegistro"]),
+    ...mapActions("example", [
+      "addRegistro",
+      "getRegistro",
+      "call_depart",
+      "call_provin",
+      "call_distridistri"
+    ]),
+    async getProv() {
+      await this.call_provin(this.form.region);
+      this.form.ciudad = "";
+      this.form.distrito = "";
+    },
+    async getDistri() {
+      await this.call_distridistri(this.form.ciudad);
+      this.form.distrito = "";
+    },
     async onSubmit(evt) {
       this.loadboton = true;
       console.log("this.form");
@@ -597,39 +681,83 @@ export default {
         message: "Registro Correcto",
         color: "green"
       });
-      //   this.form.nombres = "";
-      //   this.form.apellidos = "";
-      //   this.form.documentIdentidad = "";
-      //   this.form.teleCelular = "";
-      //   this.form.direccion = "";
-      //   this.form.metodosDePago = null;
-
-      //   this.$refs.nombres.resetValidation();
-      //   this.$refs.apellidos.resetValidation();
-      //   this.$refs.documentIdentidad.resetValidation();
-      //   this.$refs.teleCelular.resetValidation();
-      //   this.$refs.direccion.resetValidation();
-      //   this.$refs.metodosDePago.resetValidation();
 
       await this.getRegistro();
       this.loadboton = false;
     },
+    paso(val) {
+      if (val === 3) {
+        this.$refs.nombres.validate();
+        this.$refs.apellidos.validate();
+        this.$refs.tipodocumento.validate();
+        this.$refs.documentIdentidad.validate();
+        this.$refs.fechaNacimiento.validate();
+        this.$refs.correoElectronico.validate();
+        this.$refs.teleCelular.validate();
+        this.$refs.pais.validate();
+        this.$refs.region.validate();
+        this.$refs.ciudad.validate();
+        this.$refs.distrito.validate();
+        this.$refs.direccion.validate();
+        this.$refs.enterarte.validate();
+        if (
+          this.$refs.nombres.hasError ||
+          this.$refs.apellidos.hasError ||
+          this.$refs.tipodocumento.hasError ||
+          this.$refs.documentIdentidad.hasError ||
+          this.$refs.fechaNacimiento.hasError ||
+          this.$refs.correoElectronico.hasError ||
+          this.$refs.teleCelular.hasError ||
+          this.$refs.pais.hasError ||
+          this.$refs.region.hasError ||
+          this.$refs.ciudad.hasError ||
+          this.$refs.distrito.hasError ||
+          this.$refs.direccion.hasError ||
+          this.$refs.enterarte.hasError
+        ) {
+          this.formHasError = true;
+          return false;
+        } else {
+          // this.$q.notify({
+          //   icon: "done",
+          //   color: "positive",
+          //   message: "Submitted"
+          // });
+          return true;
+        }
+      } else if (val === 4) {
+        this.$refs.Industriaogiro.validate();
+        this.$refs.areadondetrabaja.validate();
+        this.$refs.Cargoopuesto.validate();
+        this.$refs.Centrodetrabajo.validate();
+        return !(
+          this.$refs.Industriaogiro.hasError ||
+          this.$refs.areadondetrabaja.hasError ||
+          this.$refs.Cargoopuesto.hasError ||
+          this.$refs.Centrodetrabajo.hasError
+        );
+      } else {
+        return true;
+      }
+    },
     lospaos() {
       console.log("this.step", this.step);
-      if (this.step == 6) {
+      if (this.step === 6) {
         console.log("this.step - dentro de if", this.step);
-        // console.log("Se ejecuto guiardar");
         this.$refs.stepper.next();
         this.onSubmit();
-        // this.$emit("guardarForm")
         this.$emit("qwe");
         location.href = "https://sgsacademy.pe/";
-      }
-      // else if (this.step == 5) {
-      //   location.href = "https://sgsacademy.pe/";
-      // }
-      else {
-        this.$refs.stepper.next();
+      } else {
+        const resp = this.paso(this.step);
+        if (resp) {
+          this.$refs.stepper.next();
+        } else {
+          this.$q.notify({
+            color: "negative",
+            message: "Validaciones Pendientes"
+          });
+        }
       }
     }
   },
@@ -674,12 +802,15 @@ export default {
 
     this.model2 = this.get_buscarConsumidor.line_items[0].name;
     this.form.fechaNacimiento = this.fechaNacimiento;
-    this.form.distrito = this.distrito;
+    this.form.distrito = this.distrito ? this.distrito : "";
     this.form.provincia = this.provincia;
     this.form.departamento = this.departamento;
     this.form.pais = "PERU";
     this.form.enteraste = this.enteraste;
     this.form.otros = this.otros;
+    await this.call_depart();
+    // await this.call_provin();
+    // await this.call_distridistri();
   }
 };
 </script>
@@ -687,6 +818,7 @@ export default {
 #q-app > div > div > div.q-page-container {
   padding-top: 0px !important;
 }
+
 .q-stepper {
   box-shadow: 0px 0px 0px 0px !important;
   border-radius: 4px;
