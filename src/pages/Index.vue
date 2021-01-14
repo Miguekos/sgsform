@@ -35,7 +35,7 @@ import {
   QSpinnerTail,
   QSpinnerRings,
   QSpinnerPuff,
-  QSpinnerBall
+  QSpinnerDots
 } from "quasar";
 export default {
   name: "PageIndex",
@@ -63,8 +63,8 @@ export default {
   },
   async created() {
     this.$q.loading.show({
-      spinner: QSpinnerTail,
-      spinnerColor: 'orange-10',
+      spinner: QSpinnerDots,
+      spinnerColor: "orange-10",
       spinnerSize: 150
     });
     this.$on("qwe", data => {
